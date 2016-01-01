@@ -1,0 +1,69 @@
+# To get started with security, check out the documentation:
+# http://symfony.com/doc/current/book/security.html
+security:
+
+    encoders:
+        # Our user class and the algorithm we'll use to encode passwords
+        # http://symfony.com/doc/current/book/security.html#encoding-the-user-s-password
+        BootstrapDemoBundle\Entity\User: 
+            algorithm: bcrypt
+            cost: 12
+        
+    # http://symfony.com/doc/current/book/security.html#where-do-users-come-from-user-providers
+    providers:
+        in_memory:
+            memory: ~
+            
+        our_db_provider:
+              entity:
+                  class: BootstrapDemoBundle:User
+                  property:  username
+
+    firewalls:
+        # disables authentication for assets and the profiler, adapt it according to your needs
+        dev:
+            pattern: ^/(_(profiler|wdt)|css|images|js)/
+            security: false
+
+        main:
+            pattern: .*
+            # activate different ways to authenticate
+            anonymous: ~
+            
+            provider:   our_db_provider
+            
+            # http_basic: ~
+            # http://symfony.com/doc/current/book/security.html#a-configuring-how-your-users-will-authenticate
+
+            # form_login: ~
+            # http://symfony.com/doc/current/cookbook/security/form_login_setup.html
+            form_login:
+                # The route name that the login form submits to
+                login_path: bootstrapdemo_security_login
+
+                check_path: bootstrapdemo_security_login_check
+                # The name of the route where the login form lives
+                # When the user tries to access a protected page, they are redirected here
+                
+                # csrf token options
+                # Secure the login form against CSRF
+                # Reference: http://symfony.com/doc/current/cookbook/security/csrf_in_login_form.html
+                csrf_parameter: _csrf_security_token
+                csrf_token_id: a_private_token
+                csrf_token_generator: security.csrf.token_manager
+                
+                default_target_path: bootstrapdemo_page_blog
+                use_referer: true
+                
+            logout:
+                # The route name the user can go to in order to logout
+                path: bootstrapdemo_security_logout
+                # The name of the route to redirect to after logging out
+                target: bootstrapdemo_page_home
+
+    access_control:
+        # this is a catch-all for the admin area
+        # additional security lives in the controllers
+        - { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/, roles: ROLE_ADMIN }
+              

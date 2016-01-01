@@ -1,0 +1,15 @@
+{# app/Resources/views/layout.html.twig #}
+<!doctype html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+		<title>{% block title %}Welcome!{% endblock %}</title>
+        <link rel="stylesheet"
+            href="{{ asset('assets/vendor/bootstrap/dist/css/bootstrap.min.css') }}">
+            {% block stylesheets %}{% endblock %}
+    </head>
+    	{% block navigator%}{% endblock %}
+	 	{% block body %}{% endblock %}
+	 	{% block footer%}{% endblock %}
+        {% block javascripts %}{% endblock %}
+</html>

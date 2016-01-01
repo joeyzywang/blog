@@ -1,0 +1,35 @@
+{% extends "layout.html.twig" %}
+{% block stylesheets %}
+<link rel="stylesheet"
+            href="{{ asset('css/login.css') }}">
+{% endblock %}
+{% block body %}
+<div class="container">
+
+      <form action="{{ path('bootstrapdemo_security_login_check') }}" method="post" class="form-signin">
+        <h2 class="form-signin-heading">Please sign in</h2>
+        <label for="inputUsernameOrEmail" class="sr-only">Username/Email</label>
+        <input type="username" id="inputUsernameOrEmail" name="_username" class="form-control" placeholder="Email address" value="{{ last_username }}" required autofocus>
+        <label for="inputPassword" class="sr-only">Password</label>
+        <input type="password" id="inputPassword" name="_password" class="form-control" placeholder="Password" required>
+        <div class="checkbox">
+          <label>
+            <input type="checkbox" value="remember-me"> Remember me
+          </label>
+        </div>
+        <input type="hidden" name="_csrf_security_token"
+	        value="{{ csrf_token('a_private_token') }}"
+	    >
+	    
+        <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+      </form>
+	{%  if error %}
+
+	<div class="alert alert-danger" role="alert">
+		<span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+		<span class="sr-only">Error:</span> {{ error.messageKey | trans }}
+	</div>
+	
+	{% endif %}
+    </div> <!-- /container -->
+{% endblock %}

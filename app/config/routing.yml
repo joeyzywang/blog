@@ -1,0 +1,8 @@
+bootstrap_demo:
+    resource: "@BootstrapDemoBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
+#app:
+#    resource: "@AppBundle/Controller/"
+#    type:     annotation

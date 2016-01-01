@@ -1,0 +1,24 @@
+{% extends "layout.html.twig" %} 
+
+{% block body %} 
+{% include 'included/navigator.html.twig' %}
+<div class="jumbotron">
+	<div class="container">
+		<h1>Index Page</h1>
+		<p>This is a Blog setting up by Symfony3.</p>
+		<p>
+			<a class="btn btn-primary btn-lg" target="_blank" href="http://symfony.com/" role="button">Learn more
+				&raquo;</a>
+		</p>
+	</div>
+</div>
+{% endblock %}
+
+{% block footer %}
+<div class="container">
+      <hr>
+      <footer>
+        <p>&copy; 2015 <a href="http://github.com/joeyzywang" target="_blank">Joey Wang</a>, Inc.</p>
+      </footer>
+    </div>
+{% endblock %}
